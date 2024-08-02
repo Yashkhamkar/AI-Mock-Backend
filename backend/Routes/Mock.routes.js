@@ -11,6 +11,6 @@ const {
 router.post("/mock-interview", createMockInterview);
 router.get("/mock-interview/:mockId", getMockInterview);
 router.get("/mock-interviews", getMockInterviewsByEmail);
-router.get("/user-status", getUserStatus);
+
 
 module.exports = router;

@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT;
 const Mockroute = require("./Routes/Mock.routes");
 const UserAnswerRoute = require("./Routes/UserAnswer.routes");
-
+const PaymentRoute = require("./Routes/Payment.routes");
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api", Mockroute);
+app.use("/payment", PaymentRoute);
 app.use("/user", UserAnswerRoute);
 
 connectDB();

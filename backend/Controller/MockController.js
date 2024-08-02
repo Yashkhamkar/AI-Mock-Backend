@@ -88,31 +88,10 @@ const getMockInterviewsByEmail = async (req, res) => {
   }
 };
 
-const getUserStatus = async (req, res) => {
-  const { email } = req.query;
-  if (!email) {
-    return res.status(400).json({ message: "Email is required" });
-  }
-
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({
-      subscriptionStatus: user.subscriptionStatus,
-      interviewCount: user.interviewCount,
-    });
-  } catch (error) {
-    console.error("Error fetching user status:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-};
 
 module.exports = {
   createMockInterview,
   getMockInterview,
   getMockInterviewsByEmail,
-  getUserStatus,
+  
 };
