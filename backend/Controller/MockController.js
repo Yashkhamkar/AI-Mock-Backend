@@ -25,6 +25,13 @@ const createMockInterview = async (req, res) => {
         message: "Please upgrade to premium to create more interviews",
       });
     }
+    const mockInterview = await MockInterview.findOne({ mockId });
+    if (mockInterview) {
+      await MockInterview.findOneAndDelete({ mockId });
+    }
+    if (!mockInterview) {
+      user.interviewCount += 1;
+    }
 
     const newMockInterview = new MockInterview({
       jsonMockResp,
@@ -38,7 +45,6 @@ const createMockInterview = async (req, res) => {
     await newMockInterview.save();
 
     // Update user's interview count
-    user.interviewCount += 1;
     await user.save();
 
     const responses = newMockInterview._doc;
@@ -88,10 +94,8 @@ const getMockInterviewsByEmail = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createMockInterview,
   getMockInterview,
   getMockInterviewsByEmail,
-  
 };
